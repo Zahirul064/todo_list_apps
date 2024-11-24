@@ -6,8 +6,68 @@ class TodoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: TodoListScreen(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const TodoListScreen(),
+
+      theme: ThemeData(
+          colorSchemeSeed: Colors.blue,
+          appBarTheme: const AppBarTheme(
+            centerTitle: true,
+            backgroundColor: Colors.blue,
+            iconTheme: IconThemeData(
+                color: Colors.white
+            ),
+            titleTextStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w600
+            ),
+          ),
+          inputDecorationTheme: const InputDecorationTheme(
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.brown),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.brown),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.brown),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.red),
+            ),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.amber,
+              foregroundColor: Colors.white,
+              textStyle: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5)
+              ),
+            ),
+          )
+      ),
     );
   }
 }
+/*ThemeData _lightTheme() {
+    return ThemeData(
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+                fixedSize: const Size.fromWidth(double.maxFinite),
+                padding: const EdgeInsets.symmetric(vertical: 12)
+            )
+        )
+    );
+  }*/
+
+
