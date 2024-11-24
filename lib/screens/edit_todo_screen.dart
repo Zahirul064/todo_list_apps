@@ -1,24 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list_apps/todo.dart';
 
-class AddNewTodoScreen extends StatefulWidget {
-  const AddNewTodoScreen({super.key});
+class EditTodoScreen extends StatefulWidget {
+  const EditTodoScreen({super.key, required this.todo});
+
+  final Todo todo;
 
   @override
-  State<AddNewTodoScreen> createState() => _AddNewTodoScreenState();
+  State<EditTodoScreen> createState() => _EditTodoScreenState();
 }
 
-class _AddNewTodoScreenState extends State<AddNewTodoScreen> {
+class _EditTodoScreenState extends State<EditTodoScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _titleTEController = TextEditingController();
-  final TextEditingController _descriptionTEController = TextEditingController();
+  late final TextEditingController _descriptionTEController =
+  TextEditingController(text: widget.todo.description);
+
+  @override
+  void initState() {
+    super.initState();
+    _titleTEController.text = widget.todo.title;
+    _descriptionTEController.text = widget.todo.description;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Add new todo',
+          'Edit todo',
         ),
       ),
       body: Padding(
@@ -62,15 +72,12 @@ class _AddNewTodoScreenState extends State<AddNewTodoScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      Todo todo = Todo(
-                        _titleTEController.text.trim(),
-                        _descriptionTEController.text.trim(),
-                        DateTime.now(),
-                      );
+                      Todo todo = Todo(_titleTEController.text.trim(),
+                          _descriptionTEController.text.trim(), DateTime.now());
                       Navigator.pop(context, todo);
                     }
                   },
-                  child: const Text('Add'),
+                  child: const Text('Update'),
                 ),
               ),
             ],
